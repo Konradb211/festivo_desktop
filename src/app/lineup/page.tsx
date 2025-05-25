@@ -1,18 +1,41 @@
-import React from "react"
+"use client"
+import { useState } from "react"
 import Title from "../components/Title/Title"
 import { ARTISTS } from "../../../constants/artists"
 import SectionTitle from "../components/SectionTitle/SectionTitle"
 import Image from "next/image"
 import Link from "next/link"
+import { days } from "../../../constants/data"
 
-const page = () => {
+const Page = () => {
+	const [selectedDay, setSelectedDay] = useState("Wszyscy")
+
+	const filteredArtists =
+		selectedDay === "Wszyscy"
+			? ARTISTS
+			: ARTISTS.filter(artist => artist.day === selectedDay)
+
 	return (
 		<div className='wrapper'>
 			<div className='h-20' />
 			<Title />
 			<SectionTitle>Artyści</SectionTitle>
+			<div className='flex flex-wrap justify-center gap-4 pb-8'>
+				{days.map(day => (
+					<button
+						key={day}
+						onClick={() => setSelectedDay(day)}
+						className={`px-4 py-2 rounded-full border transition-colors duration-300 cursor-pointer ${
+							selectedDay === day
+								? "bg-[#f8b24b] text-white border-[#f8b24b]"
+								: "bg-white text-black border-gray-300 hover:border-[#f8b24b] hover:text-white hover:bg-[#f8b24b]"
+						}`}>
+						{day}
+					</button>
+				))}
+			</div>
 			<div className='flex flex-wrap justify-center gap-6'>
-				{ARTISTS.map(artist => (
+				{filteredArtists.map(artist => (
 					<Link
 						className='artist-calc-width'
 						href={`/artists/${artist.id}`}
@@ -38,4 +61,4 @@ const page = () => {
 	)
 }
 
-export default page
+export default Page

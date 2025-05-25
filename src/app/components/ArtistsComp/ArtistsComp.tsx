@@ -36,10 +36,10 @@ const ArtistsComp = () => {
 					</Link>
 				))}
 			</div>
-			<div className='flex justify-center my-10'>
+			<div className='flex justify-center pt-14'>
 				<Link
-					className='bg-[#f8b24b] py-2.5 px-4 font-bold uppercase rounded'
-					href='/'>
+					className='bg-[#f8b24b] py-2.5 px-4 font-bold uppercase rounded hover:bg-[#f8b24b]'
+					href='/lineup'>
 					Zobacz więcej
 				</Link>
 			</div>
