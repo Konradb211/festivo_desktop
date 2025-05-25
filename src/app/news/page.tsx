@@ -15,18 +15,28 @@ const page = () => {
 						<a
 							href={`/news/${post.id}`}
 							key={post.id}
-							className='flex flex-col justify-start items-center'>
-							<div className='w-full max-w-[400px]'>
-								<Image
-									src={post.image}
-									width={400}
-									height={400}
-									alt={post.title}
-									className='w-full h-auto'
-								/>
-								<p className='text-justify w-full max-w-[400px] mt-2'>
+							className='group flex flex-col items-center bg-[#f3f3f3] w-full max-w-[400px] h-full'>
+							<div className='flex flex-col flex-grow w-full'>
+								<div className='overflow-hidden'>
+									<Image
+										src={post.image}
+										width={400}
+										height={400}
+										alt={post.title}
+										className='w-full h-auto transition-transform duration-300 ease-in-out transform group-hover:scale-110'
+									/>
+								</div>
+								<p className='text-center text-xl font-bold px-5 py-5'>
+									{post.title}
+								</p>
+								<p className='text-justify px-5 py-5 flex-grow'>
 									{post.description}
 								</p>
+								<div className='px-5 py-5'>
+									<p className='transition-colors duration-300 group-hover:font-bold'>
+										czytaj więcej
+									</p>
+								</div>
 							</div>
 						</a>
 					))}
