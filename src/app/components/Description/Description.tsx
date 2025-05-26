@@ -2,7 +2,7 @@ import SectionTitle from "../SectionTitle/SectionTitle"
 
 const Description = () => {
 	return (
-		<div className='wrapper max-w-4xl mx-auto px-6 py-16 text-center'>
+		<div className='wrapper max-w-4xl mx-auto px-5 py-16 text-center'>
 			<SectionTitle>O FESTIWALU</SectionTitle>
 			<p className='text-lg leading-relaxed text-zinc-700 mt-6 space-y-4'>
 				<span className='block'>

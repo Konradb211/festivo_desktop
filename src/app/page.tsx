@@ -3,6 +3,7 @@ import ArtistsComp from "./components/ArtistsComp/ArtistsComp"
 import Description from "./components/Description/Description"
 import Faq from "./components/Faq/Faq"
 import Map from "./components/Map/Map"
+import News from "./components/News/News"
 import Title from "./components/Title/Title"
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
 				<Description />
 				<ArtistsComp />
 				<Faq />
+				<News />
 			</main>
 		</>
 	)
