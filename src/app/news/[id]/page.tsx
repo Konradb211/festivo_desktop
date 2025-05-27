@@ -1,8 +1,9 @@
+"use client"
 import React from "react"
-import { news } from "../../../../constants/news"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import SectionTitle from "@/app/components/SectionTitle/SectionTitle"
+import { useNews } from "../../../../hooks/useNews"
 
 interface NewsPageProps {
 	params: {
@@ -11,6 +12,7 @@ interface NewsPageProps {
 }
 
 const News = ({ params }: NewsPageProps) => {
+	const { news } = useNews()
 	const post = news.find(a => a.id === Number(params.id))
 
 	if (!post) return notFound

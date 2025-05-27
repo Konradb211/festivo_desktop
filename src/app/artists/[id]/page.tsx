@@ -1,91 +1,111 @@
-import { notFound } from "next/navigation"
-import { ARTISTS } from "../../../../constants/artists"
+"use client"
+
+import { useParams } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
+import { useArtists } from "../../../../hooks/useArtists"
 
-interface ArtistPageProps {
-	params: {
-		id: string
+export default function ArtistsPage() {
+	const params = useParams()
+	const id = Number(params?.id)
+
+	const { artists, loading, error } = useArtists()
+
+	if (loading) return <p className='text-center py-10'>Ładowanie…</p>
+	if (error) return <p className='text-center py-10 text-red-500'>{error}</p>
+
+	const artist = artists.find(a => a.id === id)
+	if (!artist) {
+		return <p className='text-center py-10'>Nie znaleziono artysty o ID {id}</p>
 	}
-}
-
-const ArtistsPage = ({ params }: ArtistPageProps) => {
-	const artists = ARTISTS.find(a => a.id === Number(params.id))
-
-	if (!artists) return notFound
 
 	return (
-		<div className='wrapper'>
+		<div className='wrapper py-10'>
 			<div className='h-20' />
-			<div className='flex justify-center py-8'>
+			<div className='flex justify-center mb-10'>
 				<div className='w-full max-w-6xl px-4'>
-					<div className='relative w-full aspect-[16/6] rounded-xl overflow-hidden shadow-lg'>
-						<Image
-							src={artists.img}
-							alt={artists.name}
-							fill
-							className='object-cover bg-center'
-							priority
-						/>
-					</div>
+					{artist.img ? (
+						<div className='relative w-full aspect-[16/6] rounded-xl overflow-hidden shadow-lg'>
+							<Image
+								src={artist.img}
+								alt={artist.name}
+								fill
+								className='object-cover'
+								priority
+							/>
+						</div>
+					) : (
+						<div className='w-full aspect-[16/6] rounded-xl bg-gray-200 flex items-center justify-center'>
+							<span className='text-gray-500'>Brak grafiki</span>
+						</div>
+					)}
 				</div>
 			</div>
-			<div className='flex sm:flex-row flex-col justify-center gap-10 sm:items-start items-center wrapper-1000 px-5'>
-				<div className='flex flex-col items-center px-4 gap-4'>
-					<h3 className='text-5xl uppercase font-bold'>{artists.name}</h3>
-					<p className='text-[#f8b24b] text-2xl pb-4'>{artists.day}</p>
-					<div className='flex gap-5 items-center justify-center'>
-						<Link
-							href={artists.spotify}
-							target='_blank'
-							className='flex flex-col items-center transform transition-transform duration-300 hover:scale-110'>
-							<Image
-								src='/logos/spotify.png'
-								alt='spotify logo'
-								width={30}
-								height={30}
-							/>
-							<span className=' font-bold mt-2 text-sm text-[#1DB954]'>
-								Spotify
-							</span>
-						</Link>
 
-						<Link
-							href={artists.youtube}
-							target='_blank'
-							className='flex flex-col items-center transform transition-transform duration-300 hover:scale-110'>
-							<Image
-								src='/logos/yt.png'
-								alt='youtube logo'
-								width={35}
-								height={35}
-							/>
-							<span className='font-bold mt-2 text-sm text-[#FF0000]'>
-								YouTube
-							</span>
-						</Link>
+			{/* Info */}
+			<div className='flex flex-col sm:flex-row justify-center gap-10 wrapper-1000 px-5'>
+				{/* Lewa kolumna: imię, dzień, linki */}
+				<div className='flex flex-col items-center sm:items-start gap-4'>
+					<h1 className='text-5xl uppercase font-bold'>{artist.name}</h1>
+					<p className='text-2xl text-[#f8b24b]'>{artist.day}</p>
+
+					<div className='flex gap-6 mt-4'>
+						{artist.Spotify && (
+							<Link
+								href={artist.Spotify}
+								target='_blank'
+								className='flex flex-col items-center transition-transform duration-300 hover:scale-110'>
+								<Image
+									src='/logos/spotify.png'
+									alt='Spotify logo'
+									width={30}
+									height={30}
+								/>
+								<span className='mt-2 text-sm font-bold text-[#1DB954]'>
+									Spotify
+								</span>
+							</Link>
+						)}
+						{artist.Youtube && (
+							<Link
+								href={artist.Youtube}
+								target='_blank'
+								className='flex flex-col items-center transition-transform duration-300 hover:scale-110'>
+								<Image
+									src='/logos/yt.png'
+									alt='YouTube logo'
+									width={35}
+									height={35}
+								/>
+								<span className='mt-2 text-sm font-bold text-[#FF0000]'>
+									YouTube
+								</span>
+							</Link>
+						)}
 					</div>
 				</div>
-				<div className=''>
-					<p className='text-center sm:text-start pb-4'>
-						{artists.description}
+
+				<div className='flex flex-col items-center sm:items-start gap-6'>
+					<p className='max-w-prose text-center sm:text-left'>
+						{artist.description}
 					</p>
-					<p className=' text-center sm:text-start'>
-						Liczba miesięcznych słuchaczy:
+					<p className='font-medium'>
+						Liczba miesięcznych słuchaczy:{" "}
+						<span className='font-bold'>{artist.listeners ?? "—"}</span>
 					</p>
-					<p className='text-center sm:text-start pb-4'>{artists.listeners}</p>
-					<div className='aspect-video w-full max-w-xl mx-auto my-4'>
-						<iframe
-							className='w-full h-full rounded-xl shadow-lg'
-							src={`https://www.youtube.com/embed/${artists.link}`}
-							title='YouTube video'
-							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-							allowFullScreen></iframe>
-					</div>
+					{artist.Youtube && (
+						<div className='w-full max-w-xl aspect-video rounded-xl overflow-hidden shadow-lg'>
+							<iframe
+								className='w-full h-full'
+								// src={`https://www.youtube.com/embed/${artist.link}`}
+								title='YouTube video'
+								allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+								allowFullScreen
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
 	)
 }
-
-export default ArtistsPage
