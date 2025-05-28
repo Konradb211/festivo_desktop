@@ -20,9 +20,24 @@
 	width: 100%;
 }
 
+.nav-desktop {
+	display: flex;
+}
+.nav-mobile {
+	display: none;
+}
+
 @media screen and (max-width: 1212px) {
 	.artist-calc-width {
 		max-width: calc(30%);
+	}
+}
+@media screen and (max-width: 967px) {
+	.nav-desktop {
+		display: none;
+	}
+	.nav-mobile {
+		display: flex;
 	}
 }
 
