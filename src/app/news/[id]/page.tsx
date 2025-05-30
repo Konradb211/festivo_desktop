@@ -18,24 +18,26 @@ const News = ({ params }: NewsPageProps) => {
 	if (!post) return notFound
 
 	return (
-		<div className='wrapper'>
-			<div className='h-20' />
-			<div className='flex justify-center py-8'>
-				<div className='w-full max-w-6xl px-4'>
-					<div className='relative w-full aspect-[16/6] rounded-xl overflow-hidden shadow-lg'>
-						<Image
-							src={post.image}
-							alt={post.title}
-							fill
-							className='object-cover bg-center'
-							priority
-						/>
-					</div>
-					<div>
-						<SectionTitle>{post.title}</SectionTitle>
-					</div>
-					<div>
-						<p>{post.description}</p>
+		<div className='bg-gradient-to-b from-yellow-50 to-white'>
+			<div className='wrapper'>
+				<div className='h-20' />
+				<div className='flex justify-center py-8'>
+					<div className='w-full max-w-6xl px-4'>
+						<div className='relative w-full aspect-[16/6] rounded-xl overflow-hidden shadow-lg'>
+							<Image
+								src={post.image}
+								alt={post.title}
+								fill
+								className='object-cover bg-center'
+								priority
+							/>
+						</div>
+						<div>
+							<SectionTitle>{post.title}</SectionTitle>
+						</div>
+						<div>
+							<p>{post.description}</p>
+						</div>
 					</div>
 				</div>
 			</div>

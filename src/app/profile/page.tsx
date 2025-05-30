@@ -1,15 +1,16 @@
-// app/profile/page.tsx
 "use client"
-
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { supabase } from "../../../lib/supabaseClient"
 import Title from "../components/Title/Title"
 import SectionTitle from "../components/SectionTitle/SectionTitle"
+import { motion } from "framer-motion"
 
 export default function ProfilePage() {
 	const [username, setUsername] = useState<string | null>(null)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState("")
+	const router = useRouter()
 
 	useEffect(() => {
 		const fetchProfile = async () => {
@@ -24,7 +25,6 @@ export default function ProfilePage() {
 				return
 			}
 
-			// tu zmieniamy .single() na .maybeSingle()
 			const { data, error: profileError } = await supabase
 				.from("profilestest")
 				.select("username")
@@ -45,24 +45,41 @@ export default function ProfilePage() {
 		fetchProfile()
 	}, [])
 
+	const handleLogout = async () => {
+		await supabase.auth.signOut()
+		router.push("/login")
+	}
 	return (
-		<div className='wrapper'>
+		<div className='min-h-screen bg-gradient-to-b from-yellow-50 to-white'>
 			<div className='h-20' />
 			<Title />
 			<SectionTitle>Twój profil</SectionTitle>
 
-			<div className='flex flex-col items-center mt-16'>
-				<div className='w-full max-w-md p-8 bg-white border rounded-xl shadow text-center'>
-					{loading && <p>Ładowanie…</p>}
+			<div className='flex flex-col items-center mt-16 px-4'>
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					className='w-full max-w-md p-8 bg-white border rounded-2xl shadow-lg text-center space-y-4'>
+					{loading && <p className='text-gray-500'>Ładowanie…</p>}
 					{error && <p className='text-red-500'>{error}</p>}
 					{!loading && !error && username && (
 						<>
-							<h2 className='text-2xl font-semibold mb-4'>
-								Witaj, {username}!
-							</h2>
+							<img
+								src={`https://api.dicebear.com/7.x/initials/svg?seed=${username}`}
+								alt='Avatar'
+								className='w-24 h-24 mx-auto rounded-full border shadow'
+							/>
+							<h2 className='text-2xl font-bold'>Witaj, {username}!</h2>
+							<p className='text-gray-500'>Uczestnik FESTIVO 2025</p>
+							<button
+								onClick={handleLogout}
+								className='w-full bg-black text-white py-3 rounded hover:bg-yellow-500 hover:text-black transition-colors cursor-pointer'>
+								Wyloguj się
+							</button>
 						</>
 					)}
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	)

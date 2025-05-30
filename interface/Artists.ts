@@ -7,4 +7,6 @@ export interface Artist {
 	Spotify: string
 	Youtube: string
 	listeners?: string
+	link?: string
+	Stage?: string
 }

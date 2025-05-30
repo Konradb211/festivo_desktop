@@ -9,7 +9,7 @@ import Title from "./components/Title/Title"
 export default function Home() {
 	return (
 		<>
-			<main>
+			<main className='bg-gradient-to-b from-yellow-50 to-white'>
 				<div className='h-20' />
 				<Title />
 				<Map />

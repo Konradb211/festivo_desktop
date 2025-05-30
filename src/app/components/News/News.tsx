@@ -8,7 +8,7 @@ const News = () => {
 	const { news, loading } = useNews()
 	const sliceNews = news.slice(0, 3)
 	return (
-		<div className='wrapper'>
+		<div className='wrapper pb-10'>
 			<SectionTitle>Najnowsze newsy</SectionTitle>
 			<div className='flex justify-center px-5'>
 				{loading ? (
@@ -27,7 +27,7 @@ const News = () => {
 											width={400}
 											height={400}
 											alt={post.title}
-											className='w-full h-auto transition-transform duration-300 ease-in-out transform group-hover:scale-110'
+											className='w-full aspect-[6/6] h-auto transition-transform duration-300 ease-in-out transform group-hover:scale-110'
 										/>
 									</div>
 									<p className='text-center text-xl font-bold px-5 py-5'>
