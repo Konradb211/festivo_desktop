@@ -5,6 +5,7 @@ import { supabase } from "../../../lib/supabaseClient"
 import Title from "../components/Title/Title"
 import SectionTitle from "../components/SectionTitle/SectionTitle"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function ProfilePage() {
 	const [username, setUsername] = useState<string | null>(null)
@@ -51,9 +52,12 @@ export default function ProfilePage() {
 	}
 	return (
 		<div className='min-h-screen bg-gradient-to-b from-yellow-50 to-white'>
-			<div className='h-20' />
+			<div className='h-20'>
 			<Title />
 			<SectionTitle>Twój profil</SectionTitle>
+
+			<div className="flex justify-center gap-5 items-start items-center">
+			<Image src="/Bezpieczna_zabawa.png" height={400} width={400} alt="Bezpieczna zabawa"/>
 
 			<div className='flex flex-col items-center mt-16 px-4'>
 				<motion.div
@@ -80,7 +84,10 @@ export default function ProfilePage() {
 						</>
 					)}
 				</motion.div>
-			</div>
+				</div>
+			<Image src="/Oznacz_nas.png" width={400} height={400} alt="Oznacz Nas!"/>
+		</div>
+		</div>
 		</div>
 	)
 }
