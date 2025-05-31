@@ -10,7 +10,7 @@ export const Informations: InfoValue[] = [
 	{
 		name: "Bilety",
 		description:
-			"Kup bilet i dołącz do najlepszej imprezy lata! Karnety dostępne online, a na miejscu tylko do wyczerpania! Pamiętaj – im szybciej, tym taniej 🔥",
+			"Kup bilet i dołącz do najlepszej imprezy lata! Karnety dostępne online, a na miejscu tylko do wyczerpania! Pamiętaj – im szybciej, tym taniej. Bilet można zakupić na naszej aplikacji mobilnej 🤘",
 		id: 1,
 	},
 	{

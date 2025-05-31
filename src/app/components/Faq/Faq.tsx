@@ -14,7 +14,7 @@ const Faq = () => {
 		<>
 			<div className='px-9 pt-16 wrapper'>
 				<SectionTitle>Informacje</SectionTitle>
-				<div className='max-width lg:bg-[#FFF6DD] mb-28 flex flex-col md:rounded-t-[60px] rounded-b-[20px] mt-[33px] secondaryFont'>
+				<div className='max-width lg:bg-[#FFF6DD] pb-10 flex flex-col md:rounded-t-[60px] rounded-b-[20px] mt-[33px] secondaryFont'>
 					<div className='flex flex-col lg:flex-row lg:space-x-2 items-center justify-center gap-2 lg:gap-0 lg:justify-start'>
 						{Informations.map((item, index) => (
 							<div

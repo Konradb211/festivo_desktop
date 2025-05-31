@@ -1,11 +1,11 @@
 "use client"
 import { useState } from "react"
 import Title from "../components/Title/Title"
-import SectionTitle from "../components/SectionTitle/SectionTitle"
 import Image from "next/image"
 import Link from "next/link"
 import { days } from "../../../constants/data"
 import { useArtists } from "../../../hooks/useArtists"
+import SectionTitle from "../components/SectionTitle/SectionTitle"
 
 const Page = () => {
 	const { artists, loading } = useArtists()
@@ -21,8 +21,15 @@ const Page = () => {
 			<div className='wrapper pb-10'>
 				<div className='h-20' />
 				<Title />
-				<SectionTitle>Artyści</SectionTitle>
-				<div className='flex flex-wrap justify-center gap-4 pb-8'>
+				<Image
+					src='/lineup-baner.png'
+					alt='baner'
+					width={1300}
+					height={600}
+					className='h-[500px] object-cover pb-10'
+				/>
+				<SectionTitle>Line Up</SectionTitle>
+				<div className='flex flex-wrap justify-center gap-4 pb-8 pt-10'>
 					{days.map(day => (
 						<button
 							key={day}

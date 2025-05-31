@@ -8,7 +8,7 @@ const News = () => {
 	const { news, loading } = useNews()
 	const sliceNews = news.slice(0, 3)
 	return (
-		<div className='wrapper pb-10'>
+		<div className='wrapper py-10'>
 			<SectionTitle>Najnowsze newsy</SectionTitle>
 			<div className='flex justify-center px-5'>
 				{loading ? (

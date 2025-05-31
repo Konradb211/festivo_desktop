@@ -9,12 +9,11 @@ import {
 } from "react-leaflet"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
-import SectionTitle from "../components/SectionTitle/SectionTitle"
 import Title from "../components/Title/Title"
 
 const bounds: L.LatLngBoundsExpression = [
-	[51.47818, 18.3495], // top-left (NW)
-	[51.475, 18.3545], // bottom-right (SE)
+	[51.47818, 18.3495],
+	[51.475, 18.3545],
 ]
 
 const customIcon = (url: string) =>
@@ -27,17 +26,15 @@ const customIcon = (url: string) =>
 export default function MapPage() {
 	return (
 		<div className='bg-gradient-to-b from-yellow-50 to-white'>
-			<div className='wrapper'>
+			<div className='wrapper pb-20'>
 				<div className='h-20' />
 				<Title />
-				<SectionTitle>Mapa</SectionTitle>
-
-				<div className='mt-8 h-[50vh] w-full rounded-lg overflow-hidden border-2 border-slate-200 shadow'>
+				<div className='mt-8 h-[60vh] w-full rounded-lg overflow-hidden border-2 border-slate-200 shadow'>
 					<MapContainer
 						center={[51.4766, 18.35182119589565]}
 						zoom={17}
 						minZoom={17}
-						maxZoom={17}
+						maxZoom={20}
 						scrollWheelZoom={true}
 						style={{ height: "100%", width: "100%", borderRadius: 5 }}>
 						<TileLayer
